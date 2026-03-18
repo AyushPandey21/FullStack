@@ -1,6 +1,9 @@
 package com.example;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,9 +14,12 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is required")
+    @Size(max = 255, message = "Title must be at most 255 characters")
     @Column(nullable = false, length = 255)
     private String title;
 
+    @Size(max = 2000, message = "Description must be at most 2000 characters")
     @Column(columnDefinition = "TEXT")
     private String description;
 
